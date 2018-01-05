@@ -1,4 +1,4 @@
-require "jekyll/plantuml_hook/version"
+require 'jekyll/plantuml_hook/version'
 
 module Jekyll
   module PlantumlHook
