@@ -1,38 +1,51 @@
 # Jekyll::PlantumlHook
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/jekyll/plantuml_hook`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Render PlantUML in jekyll.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+First of all, determine a parser gem to use. jekyll-plantuml_hook supports [nokogiri](https://rubygems.org/gems/nokogiri) and [oga](https://rubygems.org/gems/oga), but you have to add it into your application.
+
+Note that you may have already one of them from other gems' dependencices. Check out your `Gemfile.lock`.
+
+Then add jekyll-plantuml_hook to your application.
 
 ```ruby
-gem 'jekyll-plantuml_hook'
+group :jekyll_plugins do
+  gem 'jekyll-plantuml_hook', git: 'https://github.com/chulkilee/jekyll-plantuml_hook.git', ref: 'master'
+end
 ```
 
-And then execute:
+Add configuration to `_config.yml`.
 
-    $ bundle
+```yaml
+plantuml_hook:
+  parser: nokogiri # or oga
 
-Or install it yourself as:
+  # to render with plantuml server
+  plantuml_url: www.plantuml.com/plantuml
 
-    $ gem install jekyll-plantuml_hook
+  # to render with jar
+  plantuml_jar_path: plantuml.jar
+```
 
 ## Usage
 
-TODO: Write usage instructions here
+Put plantuml code in code block as `plantuml`.
+
+    ```plantuml
+    @startuml
+    Bob -> Alice : hello
+    @enduml
+    ```
 
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/jekyll-plantuml_hook. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/chulkilee/jekyll-plantuml_hook. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
@@ -40,4 +53,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Jekyll::PlantumlHook project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/jekyll-plantuml_hook/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the Jekyll::PlantumlHook project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](CODE_OF_CONDUCT.md).
