@@ -8,16 +8,18 @@ module Jekyll
       class << self
         def register_hook
           ::Jekyll::Hooks.register(%i[pages post], :post_render) do |page|
-            renderer = get_plantuml_renderer(page.site.config)
-            case get_config(page.site.config, 'parser')
-            when 'nokogiri'
-              require 'nokogiri'
-              process_with_nokogiri(page, renderer)
-            when 'oga'
-              require 'oga'
-              process_with_oga(page, renderer)
-            else
-              raise 'Unknown parser config for PlantUMLHook'
+            renderer = get_plantuml_renderer(page.site.config)    
+            if page.path.end_with?('.md') || !page.path.include?('.') then            
+              case get_config(page.site.config, 'parser')
+              when 'nokogiri'
+                require 'nokogiri'
+                process_with_nokogiri(page, renderer)
+              when 'oga'
+                require 'oga'
+                process_with_oga(page, renderer)
+              else
+                raise 'Unknown parser config for PlantUMLHook'
+              end
             end
           end
         end
