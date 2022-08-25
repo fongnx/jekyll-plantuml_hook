@@ -25,7 +25,7 @@ module Jekyll
       end
 
       def gen_url(url, text, format)
-        [url, format, compress_text(text)].join('/')
+        [url, format, str.concat("~1", compress_text(text))].join('/')
       end
 
       def compress_text(text)
